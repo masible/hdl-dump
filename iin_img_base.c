@@ -81,7 +81,6 @@ int img_base_add_part(iin_img_base_t *img_base,
                       u_int32_t device_sector_size)
 {
     part_t *dest;
-    part_t *prev;
     u_int32_t len;
     if (img_base->num_parts == img_base->alloc_parts) { /* (re)alloc memory */
         u_int32_t bytes = (img_base->alloc_parts + PARTS_GROW) * sizeof(part_t);
@@ -98,7 +97,6 @@ int img_base_add_part(iin_img_base_t *img_base,
             return (RET_NO_MEM);
     }
 
-    prev = img_base->num_parts > 0 ? img_base->parts + img_base->num_parts - 1 : NULL;
     dest = img_base->parts + img_base->num_parts;
     dest->offset_s = img_base->offset_s;
     dest->length_s = length_s;
