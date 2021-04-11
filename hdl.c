@@ -114,30 +114,6 @@ static const char *HDL_HDR2 =
     "uninstallmes1 =\n"
     "uninstallmes2 =\n";
 
-static const char *HDL_HDR3 =
-    "title = %s\n"    /* "Game Name" */
-    "title_id = %s\n" /* startup */
-    "title_sub_id = 0\n"
-    "release_date = 20000101\n"
-    "developer_id =\n"
-    "publisher_id = miniOPL\n" /* hdloader */
-    "note =\n"                 /* 22, 47, 92 */
-    "content_web =\n"
-    "image_topviewflag = 0\n"
-    "image_type = 0\n"
-    "image_count = 1\n"
-    "image_viewsec = 600\n"
-    "copyright_viewflag = 1\n"
-    "copyright_imgcount = 1\n"
-    "genre =\n"
-    "parental_lock = 1\n"
-    "effective_date = 0\n"
-    "expire_date = 0\n"
-    "violence_flag = 0\n"
-    "content_type = 255\n"
-    "content_subtype = 0\n";
-
-
 /**************************************************************/
 static int
 prepare_main(const hdl_game_t *details,
@@ -166,14 +142,6 @@ prepare_main(const hdl_game_t *details,
     char icon_props[1024];
     const ps2_partition_header_t *part;
     const apa_slice_t *slice = toc->slice + slice_index;
-
-    FILE *out = fopen("./info.sys", "wb");
-    if (out != NULL) {
-        char info_props[1024];
-        sprintf(info_props, HDL_HDR3, details->name, details->startup);
-        fwrite(info_props, 1, strlen(info_props), out);
-    }
-    (void)fclose(out);
 
     part = NULL;
 
