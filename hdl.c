@@ -1271,9 +1271,10 @@ int hdl_modify_game(hio_t *hio,
     result = hio->read(hio, sector, 2, hdl_hdr, &bytes);
     if (result == RET_OK) {
         if (new_name != NULL && !toc->is_toxic) { /* HD Loader partition naming: "PP.HDL.Game name" */
-            char part_id[PS2_PART_IDMAX];
+            char part_id[PS2_PART_IDMAX + 1];
             int tmp_slice_index = 0;
             u_int32_t tmp_partition_index = 0;
+            part_id[PS2_PART_IDMAX] = '\0';
             hdl_pname(NULL, new_name, part_id);
             result = apa_find_partition(toc, part_id, &tmp_slice_index,
                                         &tmp_partition_index);
